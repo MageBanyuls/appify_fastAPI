@@ -152,3 +152,13 @@ async def actualizar_estado(tipo: str, folio: str, emisor: str):
     """
     url = f"https://libredte.cl/api/dte/dte_emitidos/actualizar_estado/{tipo}/{folio}/{emisor}?usarWebservice=1"
     return peticion_get(url)
+
+@app.get("/dte_emitidos/eliminar", tags=["Documentos Emitidos"])
+async def eliminar_dte_emitido(tipo: str, folio: str, emisor: str):
+    """
+    
+    Recurso que permite eliminar un DTE emitido y enviado al SII que se encuentra en estado rechazado, o bien un DTE que fue emitido pero no se pudo enviar al SII y no se desea enviar.
+
+    """
+    url = f"https://libredte.cl/api/dte/dte_emitidos/eliminar/{tipo}/{folio}/{emisor}"
+    return peticion_get(url)
