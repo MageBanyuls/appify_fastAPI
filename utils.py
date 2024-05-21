@@ -1,4 +1,4 @@
-# utils.py
+from fastapi import Response
 import json
 import requests
 from requests.auth import HTTPBasicAuth
@@ -13,6 +13,31 @@ def peticion_get(url):
         response = requests.get(url, headers=headers, auth=HTTPBasicAuth(username, password))
         if response.status_code == 200:
             return response.json()
+        else:
+            return {
+                "success": False,
+                "message": f"Error: {response.status_code}",
+                "response_text": response.text,
+                "response_headers": dict(response.headers)
+            }
+    except Exception as e:
+        return {"success": False, "message": f"Error: {str(e)}"}
+
+
+def peticion_get_pdf(url):
+    try:
+        username = Config.USER
+        password = Config.PASSWORD
+        print(username +' '+ password)
+        headers = {'Accept': 'application/json'}
+        response = requests.get(url, headers=headers, auth=HTTPBasicAuth(username, password))
+        if response.status_code == 200:
+            filename = "documento.pdf"
+            return Response(
+                response.content,
+                media_type='application/pdf',
+                headers={"Content-Disposition": f"attachment;filename={filename}"}
+            )
         else:
             return {
                 "success": False,

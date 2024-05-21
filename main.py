@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 
 from typing import List
-from utils import peticion_get, peticion_post
+from utils import peticion_get, peticion_post, peticion_get_pdf
 from dotenv import load_dotenv
 load_dotenv()
 app = FastAPI()
@@ -94,7 +94,7 @@ async def pdf_tmps(codigo: str, dte: str, emisor: str, receptor: str):
 
     """
     url = f"https://libredte.cl/api/dte/dte_tmps/pdf/{receptor}/{dte}/{codigo}/{emisor}?cotizacion=0&formato=general&papelContinuo=0&compress=0"
-    return peticion_get(url)
+    return peticion_get_pdf(url)
 
 @app.get("/dte_tmps/xml", tags=["Documentos Temporales"])
 async def xml_tmps(codigo: str, dte: str, emisor: str, receptor: str):
@@ -132,7 +132,7 @@ async def pdf_emitidos(dte: str, emisor: str, folio: str):
 
     """
     url = f"https://libredte.cl/api/dte/dte_emitidos/pdf/{dte}/{folio}/{emisor}"
-    return peticion_get(url)
+    return peticion_get_pdf(url)
 
 @app.get("/dte_emitidos/xml", tags=["Documentos Emitidos"])
 async def xml_emitidos(dte: str, emisor: str, folio: str):
