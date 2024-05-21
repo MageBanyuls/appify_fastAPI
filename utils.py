@@ -10,11 +10,16 @@ def peticion_get(url):
         password = Config.PASSWORD
         print(username +' '+ password)
         headers = {'Accept': 'application/json'}
-        response = requests.get(url, headers=headers, auth=HTTPBasicAuth(username, password))
+        response = requests.get(url, headers=headers, auth=HTTPBasicAuth(Username, Password))
         if response.status_code == 200:
             return response.json()
         else:
-            return {"success": False, "message": f"Error: {response.status_code}"}
+            return {
+                "success": False,
+                "message": f"Error: {response.status_code}",
+                "response_text": response.text,
+                "response_headers": dict(response.headers)
+            }
     except Exception as e:
         return {"success": False, "message": f"Error: {str(e)}"}
 
