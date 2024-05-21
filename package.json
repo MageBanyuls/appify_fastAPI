@@ -1,5 +1,5 @@
 {
     "scripts": {
-      "start": "fastapi run"
+      "start": "uvicorn main:app --reload"
     }
   }
