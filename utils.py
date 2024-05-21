@@ -8,7 +8,7 @@ def peticion_get(url):
     try:
         username = Config.USER
         password = Config.PASSWORD
-        print(username + password)
+        print(username +' '+ password)
         headers = {'Accept': 'application/json'}
         response = requests.get(url, headers=headers, auth=HTTPBasicAuth(username, password))
         if response.status_code == 200:

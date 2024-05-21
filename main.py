@@ -1,6 +1,7 @@
 # main.py
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
+
 from typing import List
 from utils import peticion_get, peticion_post
 from dotenv import load_dotenv
@@ -146,9 +147,228 @@ async def xml_emitidos(dte: str, emisor: str, folio: str):
 @app.get("/dte_emitidos/actualizarestado", tags=["Documentos Emitidos"])
 async def actualizar_estado(tipo: str, folio: str, emisor: str):
     """
-    
+
     Actualiza el estado de un DTE real.
 
     """
     url = f"https://libredte.cl/api/dte/dte_emitidos/actualizar_estado/{tipo}/{folio}/{emisor}?usarWebservice=1"
+    return peticion_get(url)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.get("/dte_folios/info", tags=["Folios"])
+async def info_folios(dte: int, emisor: str):
+    """
+
+    Obtener informacion de un folio.
+
+    """
+    url = f"https://libredte.cl/api/dte/admin/dte_folios/info/{dte}/{emisor}"
+    return peticion_get(url)
+
+
+@app.get("/dte_folios/estado", tags=["Folios"])
+async def estado_folios(dte: int, folio :int, emisor: str):
+    """
+
+    Obtener el estado de un folio en el SII.
+
+    """
+    url = f"https://libredte.cl/api/dte/admin/dte_folios/estado/{dte}/{folio}/{emisor}?formato=json"
+    return peticion_get(url)
+
+@app.get("/dte_folios/anular", tags=["Folios"])
+async def anular_folio(dte: int, folio :int, emisor: str):
+    """
+
+    Obtener el estado de un folio en el SII.
+
+    """
+    url = f"https://libredte.cl/api/dte/admin/dte_folios/anular/{dte}/{folio}/{emisor}?formato=json"
     return peticion_get(url)
