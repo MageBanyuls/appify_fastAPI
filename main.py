@@ -164,7 +164,10 @@ async def eliminar_dte_emitido(tipo: str, folio: str, emisor: str):
     url = f"https://libredte.cl/api/dte/dte_emitidos/eliminar/{tipo}/{folio}/{emisor}"
     return peticion_get(url)
 
+@app.get("/")
+async def home():
 
+    return {"Estoy": "Desplegado"}
 
 
 

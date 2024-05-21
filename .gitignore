@@ -2,3 +2,4 @@ venv
 .env
 documento_firmado.xml
 signature.py
+VALIDATION_DTE
