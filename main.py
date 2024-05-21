@@ -138,7 +138,7 @@ async def pdf_emitidos(dte: str, emisor: str, folio: str):
 async def xml_emitidos(dte: str, emisor: str, folio: str):
     """
 
-    Obtiene el XML de un DTE temporal.
+    Obtiene el XML de un DTE real.
 
     """
     url = f"https://libredte.cl/api/dte/dte_emitidos/xml/{dte}/{folio}/{emisor}"
