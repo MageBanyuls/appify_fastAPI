@@ -23,7 +23,7 @@ def peticion_get(url):
     except Exception as e:
         return {"success": False, "message": f"Error: {str(e)}"}
 
-
+#ho
 def peticion_get_pdf(url):
     try:
         username = Config.USER
