@@ -53,13 +53,28 @@ def peticion_post(data, url):
         payload = json.dumps(data)
         username = Config.USER
         password = Config.PASSWORD
-
         
-        headers = {'Accept': 'application/json'}
+        headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
         response = requests.post(url, headers=headers, data=payload, auth=HTTPBasicAuth(username, password))
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return {"success": False, "message": f"Error: {response.status_code}"}
+        response.raise_for_status()  # Esto generará una excepción para códigos de estado HTTP 4xx/5xx
+        return response.json()
+    except requests.exceptions.HTTPError as http_err:
+        return {
+            "success": False,
+            "message": f"HTTP error occurred: {http_err}",
+            "status_code": response.status_code,
+            "response_text": response.text,
+            "response_headers": dict(response.headers)
+        }
+    except requests.exceptions.RequestException as req_err:
+        return {
+            "success": False,
+            "message": f"Request exception occurred: {req_err}",
+            "response_text": response.text if 'response' in locals() else None,
+            "response_headers": dict(response.headers) if 'response' in locals() else None
+        }
     except Exception as e:
-        return {"success": False, "message": f"Error: {str(e)}"}
+        return {
+            "success": False,
+            "message": f"An error occurred: {str(e)}"
+        }
