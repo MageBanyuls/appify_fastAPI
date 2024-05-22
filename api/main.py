@@ -12,7 +12,7 @@ app = FastAPI()
 class IdDoc(BaseModel):
     TipoDTE: int
     FchEmis: str
-    Folio: str
+    Folio: int
 
 class Emisor(BaseModel):
     RUTEmisor: str
@@ -34,7 +34,7 @@ class DetalleItem(BaseModel):
 class ReferenciaItem(BaseModel):
     TpoDocRef: str
     RazonRef: str
-    FolioRef: str
+    FolioRef: int
 
 class Encabezado(BaseModel):
     IdDoc: IdDoc
