@@ -44,7 +44,7 @@ class Encabezado(BaseModel):
 class DteTemporalData(BaseModel):
     Encabezado: Encabezado
     Detalle: List[DetalleItem]
-    Referencia:List[ReferenciaItem]
+    #Referencia:List[ReferenciaItem]
 
 class DteRealData(BaseModel):
     codigo: str
