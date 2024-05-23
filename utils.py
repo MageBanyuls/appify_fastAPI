@@ -15,10 +15,8 @@ def peticion_get(url):
             return response.json()
         else:
             return {
-                "success": False,
-                "message": f"Error: {response.status_code}",
-                "response_text": response.text,
-                "response_headers": dict(response.headers)
+                "status": f"{response.status_code}",
+                "message": f"{response.text}",
             }
     except Exception as e:
         return {"success": False, "message": f"Error: {str(e)}"}

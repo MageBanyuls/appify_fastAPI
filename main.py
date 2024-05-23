@@ -89,9 +89,7 @@ async def info_tmps(codigo: str, dte: str, emisor: str, receptor: str):
 @app.get("/dte_tmps/pdf", tags=["Documentos Temporales"])
 async def pdf_tmps(codigo: str, dte: str, emisor: str, receptor: str):
     """
-    
     Obtiene el PDF de un DTE temporal.
-
     """
     url = f"https://libredte.cl/api/dte/dte_tmps/pdf/{receptor}/{dte}/{codigo}/{emisor}?cotizacion=0&formato=general&papelContinuo=0&compress=0"
     return peticion_get_pdf(url)
