@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 
 from typing import List
-from utils import peticion_get, peticion_post, peticion_get_pdf
+from utils import peticion_get, peticion_post, peticion_get_pdf, peticion_get_rifa
 from dotenv import load_dotenv
 load_dotenv()
 app = FastAPI()
@@ -169,6 +169,16 @@ async def home():
 
     return {"Estoy": "Desplegado"}
 
+
+@app.get("/actualizar/rifa/db", tags=["Documentos Emitidos"])
+async def eliminar_dte_emitido(offset: int):
+    """
+    
+    Api para interactuar con MP
+
+    """
+    url = f"https://api.mercadopago.com/preapproval/search?limit=100&offset={offset}"
+    return peticion_get_rifa(url)
 
 
 

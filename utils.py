@@ -78,3 +78,24 @@ def peticion_post(data, url):
             "success": False,
             "message": f"An error occurred: {str(e)}"
         }
+    
+
+def peticion_get_rifa(url):
+    try:
+        token = Config.Bearer
+        headers = {
+            'Authorization': f'Bearer {token}',
+            'Content-Type': 'application/json'
+        }
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {
+                "success": False,
+                "message": f"Error: {response.status_code}",
+                "response_text": response.text,
+                "response_headers": dict(response.headers)
+            }
+    except Exception as e:
+        return {"success": False, "message": f"Error: {str(e)}"}
