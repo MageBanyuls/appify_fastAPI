@@ -81,6 +81,7 @@ def peticion_post(data, url):
 def peticion_get_rifa(url):
     try:
         token = Config.Bearer
+        print(token)
         headers = {
             'Authorization': f'Bearer {token}',
             'Content-Type': 'application/json'

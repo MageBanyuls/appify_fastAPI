@@ -1,12 +1,39 @@
 # main.py
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 from typing import List
 from utils import peticion_get, peticion_post, peticion_get_pdf, peticion_get_rifa
 from dotenv import load_dotenv
 load_dotenv()
+
 app = FastAPI()
+
+# Configuración del CORS
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "https://appify-fas-api.vercel.app/",
+    # Agrega otros dominios que necesites
+]
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# Configuración del CORS para permitir todos los orígenes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class IdDoc(BaseModel):
@@ -168,6 +195,7 @@ async def eliminar_dte_emitido(tipo: str, folio: str, emisor: str):
 async def home():
 
     return {"Estoy": "Desplegado"}
+
 
 
 @app.get("/actualizar/rifa/db", tags=["Documentos Emitidos"])
