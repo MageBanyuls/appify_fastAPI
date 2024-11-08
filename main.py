@@ -52,7 +52,7 @@ class DteRealData(BaseModel):
     emisor: int
     receptor: int
 
-# Define la función para el endpoint
+
 @app.post("/dte-temporal", tags=["Emisión de Documentos"])
 async def dte_temporal(request: Request, dte_data: DteTemporalData):
     """
