@@ -54,7 +54,7 @@ def peticion_post(data, url):
         
         headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
         response = requests.post(url, headers=headers, data=payload, auth=HTTPBasicAuth(username, password))
-        response.raise_for_status()  # Esto generará una excepción para códigos de estado HTTP 4xx/5xx
+        response.raise_for_status()  
         return response.json()
     except requests.exceptions.HTTPError as http_err:
         return {
